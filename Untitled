@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool type(string s)
+{
+    bool ok = true;
+    for(int i = 0; i < s.length(); i++)
+    {
+        if(isdigit(s[i]))
+        {
+            for(int j = i; j < s.length(); j++)ok *= isdigit(s[j]);
+            return ok;
+        }
+    }
+}
+__int64 to_int(string s)
+{
+    __int64 k = 0;
+    for(int i = 0; i < s.length(); i++)
+    {
+        k = k * 26 + s[i] - 'A' + 1;
+    }
+    return k;
+}
+string to_string(string s)
+{
+    __int64 k = 0;
+    for(int i = 0; i < s.length(); i++)
+    {
+        k = k * 10 + s[i] - '0';
+    }
+    string  p = "";
+    while(k)
+    {
+        p += char('A' + k % 26 - 1);
+        k /= 26;
+    }
+    reverse(p.begin(),p.end());
+    return p;
+}
+void go1(string s)
+{
+    string p = "",t = "";
+    for(int i = 0; i < s.length(); i++)
+    {
+        if(isalpha(s[i]))p += s[i];
+        else
+        {
+            for(int j = i; j < s.length(); j++)t += s[j];
+            break;
+        }
+    }
+    cout << "R" << t << "C" << to_int(p) << "\n";
+}
+void go2(string s)
+{
+    string p = "",t = "";
+    for(int i = 1; i < s.length(); i++)
+    {
+        if(s[i] != 'C')p += s[i];
+        else
+        {
+            for(int j = i + 1; j < s.length(); j++)t += s[j];
+            break;
+        }
+    }
+    cout << to_string(t) << p << "\n";
+}
+int main ()
+{
+    ios_base::sync_with_stdio(false);
+    int n;
+    string s;
+    cin >> n;
+    while(n--)
+    {
+        cin >> s;
+        if(type(s))go1(s);
+        else go2(s);
+    }
+}
