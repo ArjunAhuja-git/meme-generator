@@ -31,8 +31,17 @@ string to_string(string s)
     string  p = "";
     while(k)
     {
-        p += char('A' + k % 26 - 1);
-        k /= 26;
+        if(k % 26)
+        {
+            p += char('A' + k % 26 - 1);
+            k /= 26;
+        }
+        else
+        {
+            p += char('A' + k % 26 + 25);
+            k /= 26;
+            k--;
+        }
     }
     reverse(p.begin(),p.end());
     return p;
